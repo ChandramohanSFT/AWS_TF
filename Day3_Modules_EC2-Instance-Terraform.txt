@@ -1,0 +1,852 @@
+
+D:\1_DevOps_Terraform_21DayCourse\terraform_1.7.0_windows_386\Day3_Build_EC2-Instance_TF>terraform init
+
+Initializing the backend...
+Initializing modules...
+╷
+│ Error: Invalid multi-line string
+│
+│   on modules\ec2\variables.tf line 14:
+│   14: variable "ec2-count {
+│   15:         description     =       "No# of Instances to Create"
+│
+│ Quoted strings may not be split over multiple lines. To produce a multi-line string, either use the \n escape to represent a newline character or use the "heredoc" multi-line template syntax.
+╵
+
+╷
+│ Error: Invalid string literal
+│
+│   on modules\ec2\variables.tf line 14:
+│   14: variable "ec2-count {
+│   15:         description     =       "No# of Instances to Create"
+│
+│ This item is not valid in a string literal.
+╵
+
+╷
+│ Error: Extraneous label for variable
+│
+│   on modules\ec2\variables.tf line 15:
+│   14: variable "ec2-count {
+│   15:         description     =       "No# of Instances to Create"
+│
+│ Only 1 labels (name) are expected for variable blocks.
+╵
+
+╷
+│ Error: Invalid block definition
+│
+│   on modules\ec2\variables.tf line 15:
+│   14: variable "ec2-count {
+│   15:         description     =       "No# of Instances to Create"
+│   16:         default         =       1
+│
+│ A block definition must have block content delimited by "{" and "}", starting on the same line as the block header.
+╵
+
+╷
+│ Error: Unsupported argument
+│
+│   on modules\ec2\variables.tf line 16:
+│   16:         default         =       1
+│
+│ An argument named "default" is not expected here.
+╵
+
+
+D:\1_DevOps_Terraform_21DayCourse\terraform_1.7.0_windows_386\Day3_Build_EC2-Instance_TF>terraform init
+
+Initializing the backend...
+Initializing modules...
+╷
+│ Error: Invalid variable name
+│
+│   on modules\ec2\variables.tf line 11:
+│   11: variable "ec2-count {
+│   12:         default         =       1
+│
+│ A name must start with a letter or underscore and may contain only letters, digits, underscores, and dashes.
+╵
+
+╷
+│ Error: Invalid multi-line string
+│
+│   on modules\ec2\variables.tf line 11:
+│   11: variable "ec2-count {
+│   12:         default         =       1
+│
+│ Quoted strings may not be split over multiple lines. To produce a multi-line string, either use the \n escape to represent a newline character or use the "heredoc" multi-line template syntax.
+╵
+
+╷
+│ Error: Invalid string literal
+│
+│   on modules\ec2\variables.tf line 11:
+│   11: variable "ec2-count {
+│   12:         default         =       1
+│
+│ This item is not valid in a string literal.
+╵
+
+╷
+│ Error: Invalid multi-line string
+│
+│   on modules\ec2\variables.tf line 12:
+│   12:         default         =       1
+│   13: }
+│
+│ Quoted strings may not be split over multiple lines. To produce a multi-line string, either use the \n escape to represent a newline character or use the "heredoc" multi-line template syntax.
+╵
+
+╷
+│ Error: Invalid multi-line string
+│
+│   on modules\ec2\variables.tf line 13:
+│   13: }
+│
+│ Quoted strings may not be split over multiple lines. To produce a multi-line string, either use the \n escape to represent a newline character or use the "heredoc" multi-line template syntax.
+╵
+
+
+D:\1_DevOps_Terraform_21DayCourse\terraform_1.7.0_windows_386\Day3_Build_EC2-Instance_TF>terraform init
+
+Initializing the backend...
+Initializing modules...
+
+Initializing provider plugins...
+- Reusing previous version of hashicorp/aws from the dependency lock file
+- Using previously-installed hashicorp/aws v5.34.0
+
+Terraform has made some changes to the provider dependency selections recorded
+in the .terraform.lock.hcl file. Review those changes and commit them to your
+version control system if they represent changes you intended to make.
+
+Terraform has been successfully initialized!
+
+You may now begin working with Terraform. Try running "terraform plan" to see
+any changes that are required for your infrastructure. All Terraform commands
+should now work.
+
+If you ever set or change modules or backend configuration for Terraform,
+rerun this command to reinitialize your working directory. If you forget, other
+commands will detect it and remind you to do so if necessary.
+
+D:\1_DevOps_Terraform_21DayCourse\terraform_1.7.0_windows_386\Day3_Build_EC2-Instance_TF>terraform validate
+╷
+│ Error: Reference to undeclared input variable
+│
+│   on modules\ec2\main.tf line 8, in resource "aws_instance" "main":
+│    8:   count                  =      var.ec2_count
+│
+│ An input variable with the name "ec2_count" has not been declared. Did you mean "ec2-count"?
+╵
+
+D:\1_DevOps_Terraform_21DayCourse\terraform_1.7.0_windows_386\Day3_Build_EC2-Instance_TF>terraform init
+
+Initializing the backend...
+Initializing modules...
+
+Initializing provider plugins...
+- Reusing previous version of hashicorp/aws from the dependency lock file
+- Using previously-installed hashicorp/aws v5.34.0
+
+Terraform has been successfully initialized!
+
+You may now begin working with Terraform. Try running "terraform plan" to see
+any changes that are required for your infrastructure. All Terraform commands
+should now work.
+
+If you ever set or change modules or backend configuration for Terraform,
+rerun this command to reinitialize your working directory. If you forget, other
+commands will detect it and remind you to do so if necessary.
+
+D:\1_DevOps_Terraform_21DayCourse\terraform_1.7.0_windows_386\Day3_Build_EC2-Instance_TF>terraform validate
+╷
+│ Error: Missing resource instance key
+│
+│   on modules\ec2\outputs.tf line 2, in output "instance_id":
+│    2:   value = aws_instance.main.id
+│
+│ Because aws_instance.main has "count" set, its attributes must be accessed on specific instances.
+│
+│ For example, to correlate with indices of a referring resource, use:
+│     aws_instance.main[count.index]
+╵
+
+D:\1_DevOps_Terraform_21DayCourse\terraform_1.7.0_windows_386\Day3_Build_EC2-Instance_TF>terraform validate
+╷
+│ Error: Reference to "count" in non-counted context
+│
+│   on modules\ec2\outputs.tf line 2, in output "instance_id":
+│    2:   value = aws_instance.main[count.index]
+│
+│ The "count" object can only be used in "module", "resource", and "data" blocks, and only when the "count" argument is set.
+╵
+
+D:\1_DevOps_Terraform_21DayCourse\terraform_1.7.0_windows_386\Day3_Build_EC2-Instance_TF>terraform fmt
+main.tf
+
+D:\1_DevOps_Terraform_21DayCourse\terraform_1.7.0_windows_386\Day3_Build_EC2-Instance_TF>terraform fmt
+
+D:\1_DevOps_Terraform_21DayCourse\terraform_1.7.0_windows_386\Day3_Build_EC2-Instance_TF>terraform validate
+╷
+│ Error: Reference to "count" in non-counted context
+│
+│   on modules\ec2\outputs.tf line 2, in output "instance_id":
+│    2:   value = aws_instance.main[count.index]
+│
+│ The "count" object can only be used in "module", "resource", and "data" blocks, and only when the "count" argument is set.
+╵
+
+D:\1_DevOps_Terraform_21DayCourse\terraform_1.7.0_windows_386\Day3_Build_EC2-Instance_TF>terraform validate
+╷
+│ Error: Invalid expression
+│
+│   on modules\ec2\outputs.tf line 2, in output "instance_id":
+│    2:   value = aws_instance.main.id*
+│    3: }
+│
+│ Expected the start of an expression, but found an invalid expression token.
+╵
+
+D:\1_DevOps_Terraform_21DayCourse\terraform_1.7.0_windows_386\Day3_Build_EC2-Instance_TF>
+D:\1_DevOps_Terraform_21DayCourse\terraform_1.7.0_windows_386\Day3_Build_EC2-Instance_TF>terraform validate
+╷
+│ Error: Missing resource instance key
+│
+│   on modules\ec2\outputs.tf line 2, in output "instance_id":
+│    2:   value = aws_instance.main.id.*
+│
+│ Because aws_instance.main has "count" set, its attributes must be accessed on specific instances.
+│
+│ For example, to correlate with indices of a referring resource, use:
+│     aws_instance.main[count.index]
+╵
+
+D:\1_DevOps_Terraform_21DayCourse\terraform_1.7.0_windows_386\Day3_Build_EC2-Instance_TF>terraform validate
+╷
+│ Error: Reference to undeclared resource
+│
+│   on modules\ec2\outputs.tf line 2, in output "instance_id":
+│    2:                 value = "${element(aws_instance.my-test-instance.*.id, 1)}"
+│
+│ A managed resource "aws_instance" "my-test-instance" has not been declared in module.dev_module.
+╵
+
+D:\1_DevOps_Terraform_21DayCourse\terraform_1.7.0_windows_386\Day3_Build_EC2-Instance_TF>terraform validate
+Success! The configuration is valid.
+
+
+D:\1_DevOps_Terraform_21DayCourse\terraform_1.7.0_windows_386\Day3_Build_EC2-Instance_TF>terraform plan
+module.dev_module.data.aws_availability_zones.available: Reading...
+module.dev_module.data.aws_availability_zones.available: Read complete after 1s [id=us-east-2]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # module.dev_module.aws_instance.main[0] will be created
+  + resource "aws_instance" "main" {
+      + ami                                  = "ami-094aa6728b151e05a"
+      + arn                                  = (known after apply)
+      + associate_public_ip_address          = (known after apply)
+      + availability_zone                    = (known after apply)
+      + cpu_core_count                       = (known after apply)
+      + cpu_threads_per_core                 = (known after apply)
+      + disable_api_stop                     = (known after apply)
+      + disable_api_termination              = (known after apply)
+      + ebs_optimized                        = (known after apply)
+      + get_password_data                    = false
+      + host_id                              = (known after apply)
+      + host_resource_group_arn              = (known after apply)
+      + iam_instance_profile                 = (known after apply)
+      + id                                   = (known after apply)
+      + instance_initiated_shutdown_behavior = (known after apply)
+      + instance_lifecycle                   = (known after apply)
+      + instance_state                       = (known after apply)
+      + instance_type                        = "t2.micro"
+      + ipv6_address_count                   = (known after apply)
+      + ipv6_addresses                       = (known after apply)
+      + key_name                             = (known after apply)
+      + monitoring                           = (known after apply)
+      + outpost_arn                          = (known after apply)
+      + password_data                        = (known after apply)
+      + placement_group                      = (known after apply)
+      + placement_partition_number           = (known after apply)
+      + primary_network_interface_id         = (known after apply)
+      + private_dns                          = (known after apply)
+      + private_ip                           = (known after apply)
+      + public_dns                           = (known after apply)
+      + public_ip                            = (known after apply)
+      + secondary_private_ips                = (known after apply)
+      + security_groups                      = (known after apply)
+      + source_dest_check                    = true
+      + spot_instance_request_id             = (known after apply)
+      + subnet_id                            = "subnet-0fb13b5ebe80afca3"
+      + tags                                 = {
+          + "Name" = "dev_module"
+        }
+      + tags_all                             = {
+          + "Name" = "dev_module"
+        }
+      + tenancy                              = (known after apply)
+      + user_data                            = (known after apply)
+      + user_data_base64                     = (known after apply)
+      + user_data_replace_on_change          = false
+      + vpc_security_group_ids               = (known after apply)
+    }
+
+Plan: 1 to add, 0 to change, 0 to destroy.
+
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+Note: You didn't use the -out option to save this plan, so Terraform can't guarantee to take exactly these actions if you run "terraform apply" now.
+
+D:\1_DevOps_Terraform_21DayCourse\terraform_1.7.0_windows_386\Day3_Build_EC2-Instance_TF>terraform apply -auto-approve
+module.dev_module.data.aws_availability_zones.available: Reading...
+module.dev_module.data.aws_availability_zones.available: Read complete after 1s [id=us-east-2]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # module.dev_module.aws_instance.main[0] will be created
+  + resource "aws_instance" "main" {
+      + ami                                  = "ami-094aa6728b151e05a"
+      + arn                                  = (known after apply)
+      + associate_public_ip_address          = (known after apply)
+      + availability_zone                    = (known after apply)
+      + cpu_core_count                       = (known after apply)
+      + cpu_threads_per_core                 = (known after apply)
+      + disable_api_stop                     = (known after apply)
+      + disable_api_termination              = (known after apply)
+      + ebs_optimized                        = (known after apply)
+      + get_password_data                    = false
+      + host_id                              = (known after apply)
+      + host_resource_group_arn              = (known after apply)
+      + iam_instance_profile                 = (known after apply)
+      + id                                   = (known after apply)
+      + instance_initiated_shutdown_behavior = (known after apply)
+      + instance_lifecycle                   = (known after apply)
+      + instance_state                       = (known after apply)
+      + instance_type                        = "t2.micro"
+      + ipv6_address_count                   = (known after apply)
+      + ipv6_addresses                       = (known after apply)
+      + key_name                             = (known after apply)
+      + monitoring                           = (known after apply)
+      + outpost_arn                          = (known after apply)
+      + password_data                        = (known after apply)
+      + placement_group                      = (known after apply)
+      + placement_partition_number           = (known after apply)
+      + primary_network_interface_id         = (known after apply)
+      + private_dns                          = (known after apply)
+      + private_ip                           = (known after apply)
+      + public_dns                           = (known after apply)
+      + public_ip                            = (known after apply)
+      + secondary_private_ips                = (known after apply)
+      + security_groups                      = (known after apply)
+      + source_dest_check                    = true
+      + spot_instance_request_id             = (known after apply)
+      + subnet_id                            = "subnet-0fb13b5ebe80afca3"
+      + tags                                 = {
+          + "Name" = "dev_module"
+        }
+      + tags_all                             = {
+          + "Name" = "dev_module"
+        }
+      + tenancy                              = (known after apply)
+      + user_data                            = (known after apply)
+      + user_data_base64                     = (known after apply)
+      + user_data_replace_on_change          = false
+      + vpc_security_group_ids               = (known after apply)
+    }
+
+Plan: 1 to add, 0 to change, 0 to destroy.
+module.dev_module.aws_instance.main[0]: Creating...
+module.dev_module.aws_instance.main[0]: Still creating... [10s elapsed]
+module.dev_module.aws_instance.main[0]: Still creating... [20s elapsed]
+module.dev_module.aws_instance.main[0]: Still creating... [30s elapsed]
+module.dev_module.aws_instance.main[0]: Still creating... [40s elapsed]
+module.dev_module.aws_instance.main[0]: Still creating... [50s elapsed]
+module.dev_module.aws_instance.main[0]: Creation complete after 57s [id=i-0d89850f0021d36a2]
+
+Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
+
+D:\1_DevOps_Terraform_21DayCourse\terraform_1.7.0_windows_386\Day3_Build_EC2-Instance_TF>terraform -output
+Usage: terraform [global options] <subcommand> [args]
+
+The available commands for execution are listed below.
+The primary workflow commands are given first, followed by
+less common or more advanced commands.
+
+Main commands:
+  init          Prepare your working directory for other commands
+  validate      Check whether the configuration is valid
+  plan          Show changes required by the current configuration
+  apply         Create or update infrastructure
+  destroy       Destroy previously-created infrastructure
+
+All other commands:
+  console       Try Terraform expressions at an interactive command prompt
+  fmt           Reformat your configuration in the standard style
+  force-unlock  Release a stuck lock on the current workspace
+  get           Install or upgrade remote Terraform modules
+  graph         Generate a Graphviz graph of the steps in an operation
+  import        Associate existing infrastructure with a Terraform resource
+  login         Obtain and save credentials for a remote host
+  logout        Remove locally-stored credentials for a remote host
+  metadata      Metadata related commands
+  output        Show output values from your root module
+  providers     Show the providers required for this configuration
+  refresh       Update the state to match remote systems
+  show          Show the current state or a saved plan
+  state         Advanced state management
+  taint         Mark a resource instance as not fully functional
+  test          Execute integration tests for Terraform modules
+  untaint       Remove the 'tainted' state from a resource instance
+  version       Show the current Terraform version
+  workspace     Workspace management
+
+Global options (use these before the subcommand, if any):
+  -chdir=DIR    Switch to a different working directory before executing the
+                given subcommand.
+  -help         Show this help output, or the help for a specified subcommand.
+  -version      An alias for the "version" subcommand.
+
+D:\1_DevOps_Terraform_21DayCourse\terraform_1.7.0_windows_386\Day3_Build_EC2-Instance_TF>terraform apply -output
+╷
+│ Error: Failed to parse command-line flags
+│
+│ flag provided but not defined: -output
+╵
+
+For more help on using this command, run:
+  terraform apply -help
+
+D:\1_DevOps_Terraform_21DayCourse\terraform_1.7.0_windows_386\Day3_Build_EC2-Instance_TF>terraform apply output
+╷
+│ Error: Failed to load "output" as a plan file
+│
+│ Error: CreateFile output: The system cannot find the file specified.
+╵
+
+D:\1_DevOps_Terraform_21DayCourse\terraform_1.7.0_windows_386\Day3_Build_EC2-Instance_TF>terraform output
+╷
+│ Warning: No outputs found
+│
+│ The state file either has no outputs defined, or all the defined outputs are empty. Please define an output in your configuration with the `output` keyword and run `terraform refresh` for it to become
+│ available. If you are using interpolation, please verify the interpolated value is not empty. You can use the `terraform console` command to assist.
+╵
+
+D:\1_DevOps_Terraform_21DayCourse\terraform_1.7.0_windows_386\Day3_Build_EC2-Instance_TF>cd modules
+
+D:\1_DevOps_Terraform_21DayCourse\terraform_1.7.0_windows_386\Day3_Build_EC2-Instance_TF\modules>cd ec2
+
+D:\1_DevOps_Terraform_21DayCourse\terraform_1.7.0_windows_386\Day3_Build_EC2-Instance_TF\modules\ec2>terraform output
+╷
+│ Warning: No outputs found
+│
+│ The state file either has no outputs defined, or all the defined outputs are empty. Please define an output in your configuration with the `output` keyword and run `terraform refresh` for it to become
+│ available. If you are using interpolation, please verify the interpolated value is not empty. You can use the `terraform console` command to assist.
+╵
+
+D:\1_DevOps_Terraform_21DayCourse\terraform_1.7.0_windows_386\Day3_Build_EC2-Instance_TF\modules\ec2>terraform refresh
+var.ami
+  Enter a value: ^X^X^Z^Zvar.subnet_id
+  Enter a value:
+
+Interrupt received.
+Please wait for Terraform to exit or data loss may occur.
+Gracefully shutting down...
+
+╷
+│ Error: No value for required variable
+│
+│   on variables.tf line 5:
+│    5: variable "ami" {
+│
+│ The root module input variable "ami" is not set, and has no default value. Use a -var or -var-file command line argument to provide a value for this variable.
+╵
+╷
+│ Error: No value for required variable
+│
+│   on variables.tf line 8:
+│    8: variable "subnet_id" {
+│
+│ The root module input variable "subnet_id" is not set, and has no default value. Use a -var or -var-file command line argument to provide a value for this variable.
+╵
+
+D:\1_DevOps_Terraform_21DayCourse\terraform_1.7.0_windows_386\Day3_Build_EC2-Instance_TF\modules\ec2>terraform fmt
+main.tf
+outputs.tf
+variables.tf
+
+D:\1_DevOps_Terraform_21DayCourse\terraform_1.7.0_windows_386\Day3_Build_EC2-Instance_TF\modules\ec2>terraform validate
+Success! The configuration is valid.
+
+
+D:\1_DevOps_Terraform_21DayCourse\terraform_1.7.0_windows_386\Day3_Build_EC2-Instance_TF\modules\ec2>terraform destroy
+var.ami
+  Enter a value: ^Zvar.subnet_id
+  Enter a value:
+
+Interrupt received.
+Please wait for Terraform to exit or data loss may occur.
+Gracefully shutting down...
+
+╷
+│ Error: No value for required variable
+│
+│   on variables.tf line 5:
+│    5: variable "ami" {
+│
+│ The root module input variable "ami" is not set, and has no default value. Use a -var or -var-file command line argument to provide a value for this variable.
+╵
+╷
+│ Error: No value for required variable
+│
+│   on variables.tf line 8:
+│    8: variable "subnet_id" {
+│
+│ The root module input variable "subnet_id" is not set, and has no default value. Use a -var or -var-file command line argument to provide a value for this variable.
+╵
+
+D:\1_DevOps_Terraform_21DayCourse\terraform_1.7.0_windows_386\Day3_Build_EC2-Instance_TF\modules\ec2>
+D:\1_DevOps_Terraform_21DayCourse\terraform_1.7.0_windows_386\Day3_Build_EC2-Instance_TF\modules\ec2>terraform fmt
+
+D:\1_DevOps_Terraform_21DayCourse\terraform_1.7.0_windows_386\Day3_Build_EC2-Instance_TF\modules\ec2>terraform validate
+Success! The configuration is valid.
+
+
+D:\1_DevOps_Terraform_21DayCourse\terraform_1.7.0_windows_386\Day3_Build_EC2-Instance_TF\modules\ec2>terraform plan
+var.ami
+  Enter a value: var.subnet_id
+  Enter a value:
+
+Interrupt received.
+Please wait for Terraform to exit or data loss may occur.
+Gracefully shutting down...
+
+╷
+│ Error: No value for required variable
+│
+│   on variables.tf line 5:
+│    5: variable "ami" {
+│
+│ The root module input variable "ami" is not set, and has no default value. Use a -var or -var-file command line argument to provide a value for this variable.
+╵
+╷
+│ Error: No value for required variable
+│
+│   on variables.tf line 8:
+│    8: variable "subnet_id" {
+│
+│ The root module input variable "subnet_id" is not set, and has no default value. Use a -var or -var-file command line argument to provide a value for this variable.
+╵
+
+D:\1_DevOps_Terraform_21DayCourse\terraform_1.7.0_windows_386\Day3_Build_EC2-Instance_TF\modules\ec2>
+
+D:\1_DevOps_Terraform_21DayCourse\terraform_1.7.0_windows_386\Day3_Build_EC2-Instance_TF\modules\ec2>
+
+D:\1_DevOps_Terraform_21DayCourse\terraform_1.7.0_windows_386\Day3_Build_EC2-Instance_TF\modules\ec2>
+
+D:\1_DevOps_Terraform_21DayCourse\terraform_1.7.0_windows_386\Day3_Build_EC2-Instance_TF\modules\ec2>cd ..
+
+D:\1_DevOps_Terraform_21DayCourse\terraform_1.7.0_windows_386\Day3_Build_EC2-Instance_TF\modules>cd ..
+
+D:\1_DevOps_Terraform_21DayCourse\terraform_1.7.0_windows_386\Day3_Build_EC2-Instance_TF>dir
+ Volume in drive D is DATA
+ Volume Serial Number is 4A52-6259
+
+ Directory of D:\1_DevOps_Terraform_21DayCourse\terraform_1.7.0_windows_386\Day3_Build_EC2-Instance_TF
+
+29-01-2024  21:33    <DIR>          .
+29-01-2024  09:11    <DIR>          ..
+29-01-2024  21:06    <DIR>          .terraform
+29-01-2024  21:12             1,377 .terraform.lock.hcl
+29-01-2024  15:25    <DIR>          create_dir
+29-01-2024  21:17               140 main.tf
+29-01-2024  19:51    <DIR>          modules
+29-01-2024  21:33             5,806 terraform.tfstate
+               3 File(s)          7,323 bytes
+               5 Dir(s)  370,175,336,448 bytes free
+
+D:\1_DevOps_Terraform_21DayCourse\terraform_1.7.0_windows_386\Day3_Build_EC2-Instance_TF>terraform fmt
+
+D:\1_DevOps_Terraform_21DayCourse\terraform_1.7.0_windows_386\Day3_Build_EC2-Instance_TF>terraform validate
+Success! The configuration is valid.
+
+
+D:\1_DevOps_Terraform_21DayCourse\terraform_1.7.0_windows_386\Day3_Build_EC2-Instance_TF>terraform plan
+module.dev_module.data.aws_availability_zones.available: Reading...
+module.dev_module.aws_instance.main[0]: Refreshing state... [id=i-0d89850f0021d36a2]
+module.dev_module.data.aws_availability_zones.available: Read complete after 1s [id=us-east-2]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # module.dev_module.aws_instance.main[0] will be created
+  + resource "aws_instance" "main" {
+      + ami                                  = "ami-094aa6728b151e05a"
+      + arn                                  = (known after apply)
+      + associate_public_ip_address          = (known after apply)
+      + availability_zone                    = (known after apply)
+      + cpu_core_count                       = (known after apply)
+      + cpu_threads_per_core                 = (known after apply)
+      + disable_api_stop                     = (known after apply)
+      + disable_api_termination              = (known after apply)
+      + ebs_optimized                        = (known after apply)
+      + get_password_data                    = false
+      + host_id                              = (known after apply)
+      + host_resource_group_arn              = (known after apply)
+      + iam_instance_profile                 = (known after apply)
+      + id                                   = (known after apply)
+      + instance_initiated_shutdown_behavior = (known after apply)
+      + instance_lifecycle                   = (known after apply)
+      + instance_state                       = (known after apply)
+      + instance_type                        = "t2.micro"
+      + ipv6_address_count                   = (known after apply)
+      + ipv6_addresses                       = (known after apply)
+      + key_name                             = (known after apply)
+      + monitoring                           = (known after apply)
+      + outpost_arn                          = (known after apply)
+      + password_data                        = (known after apply)
+      + placement_group                      = (known after apply)
+      + placement_partition_number           = (known after apply)
+      + primary_network_interface_id         = (known after apply)
+      + private_dns                          = (known after apply)
+      + private_ip                           = (known after apply)
+      + public_dns                           = (known after apply)
+      + public_ip                            = (known after apply)
+      + secondary_private_ips                = (known after apply)
+      + security_groups                      = (known after apply)
+      + source_dest_check                    = true
+      + spot_instance_request_id             = (known after apply)
+      + subnet_id                            = "subnet-0fb13b5ebe80afca3"
+      + tags                                 = {
+          + "Name" = "dev_module"
+        }
+      + tags_all                             = {
+          + "Name" = "dev_module"
+        }
+      + tenancy                              = (known after apply)
+      + user_data                            = (known after apply)
+      + user_data_base64                     = (known after apply)
+      + user_data_replace_on_change          = false
+      + vpc_security_group_ids               = (known after apply)
+    }
+
+Plan: 1 to add, 0 to change, 0 to destroy.
+
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+Note: You didn't use the -out option to save this plan, so Terraform can't guarantee to take exactly these actions if you run "terraform apply" now.
+
+D:\1_DevOps_Terraform_21DayCourse\terraform_1.7.0_windows_386\Day3_Build_EC2-Instance_TF>terraform apply -auto-approve
+module.dev_module.data.aws_availability_zones.available: Reading...
+module.dev_module.aws_instance.main[0]: Refreshing state... [id=i-0d89850f0021d36a2]
+module.dev_module.data.aws_availability_zones.available: Read complete after 1s [id=us-east-2]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # module.dev_module.aws_instance.main[0] will be created
+  + resource "aws_instance" "main" {
+      + ami                                  = "ami-094aa6728b151e05a"
+      + arn                                  = (known after apply)
+      + associate_public_ip_address          = (known after apply)
+      + availability_zone                    = (known after apply)
+      + cpu_core_count                       = (known after apply)
+      + cpu_threads_per_core                 = (known after apply)
+      + disable_api_stop                     = (known after apply)
+      + disable_api_termination              = (known after apply)
+      + ebs_optimized                        = (known after apply)
+      + get_password_data                    = false
+      + host_id                              = (known after apply)
+      + host_resource_group_arn              = (known after apply)
+      + iam_instance_profile                 = (known after apply)
+      + id                                   = (known after apply)
+      + instance_initiated_shutdown_behavior = (known after apply)
+      + instance_lifecycle                   = (known after apply)
+      + instance_state                       = (known after apply)
+      + instance_type                        = "t2.micro"
+      + ipv6_address_count                   = (known after apply)
+      + ipv6_addresses                       = (known after apply)
+      + key_name                             = (known after apply)
+      + monitoring                           = (known after apply)
+      + outpost_arn                          = (known after apply)
+      + password_data                        = (known after apply)
+      + placement_group                      = (known after apply)
+      + placement_partition_number           = (known after apply)
+      + primary_network_interface_id         = (known after apply)
+      + private_dns                          = (known after apply)
+      + private_ip                           = (known after apply)
+      + public_dns                           = (known after apply)
+      + public_ip                            = (known after apply)
+      + secondary_private_ips                = (known after apply)
+      + security_groups                      = (known after apply)
+      + source_dest_check                    = true
+      + spot_instance_request_id             = (known after apply)
+      + subnet_id                            = "subnet-0fb13b5ebe80afca3"
+      + tags                                 = {
+          + "Name" = "dev_module"
+        }
+      + tags_all                             = {
+          + "Name" = "dev_module"
+        }
+      + tenancy                              = (known after apply)
+      + user_data                            = (known after apply)
+      + user_data_base64                     = (known after apply)
+      + user_data_replace_on_change          = false
+      + vpc_security_group_ids               = (known after apply)
+    }
+
+Plan: 1 to add, 0 to change, 0 to destroy.
+module.dev_module.aws_instance.main[0]: Creating...
+module.dev_module.aws_instance.main[0]: Still creating... [10s elapsed]
+module.dev_module.aws_instance.main[0]: Still creating... [20s elapsed]
+module.dev_module.aws_instance.main[0]: Still creating... [30s elapsed]
+module.dev_module.aws_instance.main[0]: Still creating... [40s elapsed]
+module.dev_module.aws_instance.main[0]: Creation complete after 46s [id=i-05607d0f854516074]
+
+Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
+
+D:\1_DevOps_Terraform_21DayCourse\terraform_1.7.0_windows_386\Day3_Build_EC2-Instance_TF>terraform validate
+Success! The configuration is valid.
+
+
+D:\1_DevOps_Terraform_21DayCourse\terraform_1.7.0_windows_386\Day3_Build_EC2-Instance_TF>terraform plan
+module.dev_module.data.aws_availability_zones.available: Reading...
+module.dev_module.aws_instance.main[0]: Refreshing state... [id=i-05607d0f854516074]
+module.dev_module.data.aws_availability_zones.available: Read complete after 0s [id=us-east-2]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  ~ update in-place
+
+Terraform will perform the following actions:
+
+  # module.dev_module.aws_instance.main[0] will be updated in-place
+  ~ resource "aws_instance" "main" {
+        id                                   = "i-05607d0f854516074"
+      ~ instance_type                        = "t2.micro" -> "t3.micro"
+        tags                                 = {
+            "Name" = "dev_module"
+        }
+        # (30 unchanged attributes hidden)
+
+        # (8 unchanged blocks hidden)
+    }
+
+Plan: 0 to add, 1 to change, 0 to destroy.
+
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+Note: You didn't use the -out option to save this plan, so Terraform can't guarantee to take exactly these actions if you run "terraform apply" now.
+
+D:\1_DevOps_Terraform_21DayCourse\terraform_1.7.0_windows_386\Day3_Build_EC2-Instance_TF>terraform apply -auto-approve
+module.dev_module.data.aws_availability_zones.available: Reading...
+module.dev_module.aws_instance.main[0]: Refreshing state... [id=i-05607d0f854516074]
+module.dev_module.data.aws_availability_zones.available: Read complete after 1s [id=us-east-2]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  ~ update in-place
+
+Terraform will perform the following actions:
+
+  # module.dev_module.aws_instance.main[0] will be updated in-place
+  ~ resource "aws_instance" "main" {
+        id                                   = "i-05607d0f854516074"
+      ~ instance_type                        = "t2.micro" -> "t3.micro"
+        tags                                 = {
+            "Name" = "dev_module"
+        }
+        # (30 unchanged attributes hidden)
+
+        # (8 unchanged blocks hidden)
+    }
+
+Plan: 0 to add, 1 to change, 0 to destroy.
+module.dev_module.aws_instance.main[0]: Modifying... [id=i-05607d0f854516074]
+module.dev_module.aws_instance.main[0]: Still modifying... [id=i-05607d0f854516074, 10s elapsed]
+module.dev_module.aws_instance.main[0]: Still modifying... [id=i-05607d0f854516074, 20s elapsed]
+module.dev_module.aws_instance.main[0]: Still modifying... [id=i-05607d0f854516074, 30s elapsed]
+module.dev_module.aws_instance.main[0]: Still modifying... [id=i-05607d0f854516074, 40s elapsed]
+module.dev_module.aws_instance.main[0]: Modifications complete after 47s [id=i-05607d0f854516074]
+
+Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
+
+D:\1_DevOps_Terraform_21DayCourse\terraform_1.7.0_windows_386\Day3_Build_EC2-Instance_TF>terraform validate
+Success! The configuration is valid.
+
+
+D:\1_DevOps_Terraform_21DayCourse\terraform_1.7.0_windows_386\Day3_Build_EC2-Instance_TF>terraform plan
+module.dev_module.data.aws_availability_zones.available: Reading...
+module.dev_module.aws_instance.main[0]: Refreshing state... [id=i-05607d0f854516074]
+module.dev_module.data.aws_availability_zones.available: Read complete after 1s [id=us-east-2]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  ~ update in-place
+
+Terraform will perform the following actions:
+
+  # module.dev_module.aws_instance.main[0] will be updated in-place
+  ~ resource "aws_instance" "main" {
+        id                                   = "i-05607d0f854516074"
+      ~ instance_type                        = "t3.micro" -> "t2.micro"
+        tags                                 = {
+            "Name" = "dev_module"
+        }
+        # (30 unchanged attributes hidden)
+
+        # (8 unchanged blocks hidden)
+    }
+
+Plan: 0 to add, 1 to change, 0 to destroy.
+
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+Note: You didn't use the -out option to save this plan, so Terraform can't guarantee to take exactly these actions if you run "terraform apply" now.
+
+D:\1_DevOps_Terraform_21DayCourse\terraform_1.7.0_windows_386\Day3_Build_EC2-Instance_TF>terraform apply -auto-approve
+module.dev_module.data.aws_availability_zones.available: Reading...
+module.dev_module.aws_instance.main[0]: Refreshing state... [id=i-05607d0f854516074]
+module.dev_module.data.aws_availability_zones.available: Read complete after 1s [id=us-east-2]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  ~ update in-place
+
+Terraform will perform the following actions:
+
+  # module.dev_module.aws_instance.main[0] will be updated in-place
+  ~ resource "aws_instance" "main" {
+        id                                   = "i-05607d0f854516074"
+      ~ instance_type                        = "t3.micro" -> "t2.micro"
+        tags                                 = {
+            "Name" = "dev_module"
+        }
+        # (30 unchanged attributes hidden)
+
+        # (8 unchanged blocks hidden)
+    }
+
+Plan: 0 to add, 1 to change, 0 to destroy.
+module.dev_module.aws_instance.main[0]: Modifying... [id=i-05607d0f854516074]
+module.dev_module.aws_instance.main[0]: Still modifying... [id=i-05607d0f854516074, 10s elapsed]
+module.dev_module.aws_instance.main[0]: Still modifying... [id=i-05607d0f854516074, 20s elapsed]
+module.dev_module.aws_instance.main[0]: Still modifying... [id=i-05607d0f854516074, 30s elapsed]
+module.dev_module.aws_instance.main[0]: Still modifying... [id=i-05607d0f854516074, 40s elapsed]
+module.dev_module.aws_instance.main[0]: Still modifying... [id=i-05607d0f854516074, 50s elapsed]
+module.dev_module.aws_instance.main[0]: Still modifying... [id=i-05607d0f854516074, 1m0s elapsed]
+module.dev_module.aws_instance.main[0]: Still modifying... [id=i-05607d0f854516074, 1m10s elapsed]
+module.dev_module.aws_instance.main[0]: Still modifying... [id=i-05607d0f854516074, 1m20s elapsed]
+module.dev_module.aws_instance.main[0]: Modifications complete after 1m27s [id=i-05607d0f854516074]
+
+Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
+
+D:\1_DevOps_Terraform_21DayCourse\terraform_1.7.0_windows_386\Day3_Build_EC2-Instance_TF>
